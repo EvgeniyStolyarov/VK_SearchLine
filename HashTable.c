@@ -20,10 +20,11 @@ int SavedPrimes[PrimesNumberCount] = {11, 101, 10111, 101111, 199999, 524287, 10
 static inline uint32_t HashEmaxx(const void* data,const size_t bytesCnt)
 {
     uint32_t hash = 0;
-    uint32_t pow = 131;
+    const uint32_t p = 131;
+    uint32_t pow = 1;
     for (size_t i = 0; i < bytesCnt; ++i) {
         hash += pow * ((uint8_t*)data)[i];
-        pow *= pow;
+        pow *= p;
     }
     return hash;
 }

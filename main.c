@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
         return EXIT_FAILURE;
     puts("Process dictionary...");
     clock_t begin = clock();
-    HashTable* hashTable = CreateHashTable(0);
+    HashTable* hashTable = CreateHashTable();
     if (BuildHashTable(hashTable, dictionary) == BUILD_FAILURE) {
         HashTableFree(hashTable);
         return EXIT_FAILURE;

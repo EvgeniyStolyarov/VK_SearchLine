@@ -27,7 +27,7 @@ typedef struct HashTable
     short primesIdx;
 } HashTable;
 
-HashTable* CreateHashTable(const int size);
+HashTable* CreateHashTable();
 int HashTableAddData(HashTable* hashTable, const void* data, const size_t len);
 int HashTableFind(const HashTable* hashTable, const void* data, const size_t len);
 void HashTableFree(HashTable* hashTable);
