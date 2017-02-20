@@ -21,7 +21,7 @@ int BuildHashTable(HashTable* hashTable, FILE* input)
     char* buff = malloc(readSize+1);
     while (fgets(buff, readSize+1, input)) {
         size_t buffLength = strlen(buff);
-        if (buff[buffLength-1] == '\n') {
+        if (buffLength && buff[buffLength-1] == '\n') {
             buff[buffLength-1] = '\0';
             --buffLength;
         }
@@ -38,7 +38,7 @@ void CheckInput(const HashTable* hashTable, FILE* input, const char* endString)
     const size_t endStringLength = strlen(endString);
     while (fgets(buff, readSize+1, input)) {
         size_t buffLength = strlen(buff);
-        if (buff[buffLength-1] == '\n') {
+        if (buffLength && buff[buffLength-1] == '\n') {
             buff[buffLength-1] = '\0';
             --buffLength;
         }
