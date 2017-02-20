@@ -61,12 +61,11 @@ BucketNode* CreateBacketNode(const void* data, const size_t len)
     return bucketNode;
 }
 
-int HashTableAddBucketNode(HashTable* hashTable, BucketNode* bucketNode)
+static void HashTableAddBucketNode(HashTable* hashTable, BucketNode* bucketNode)
 {
     size_t idx = HashFunc(bucketNode->data, bucketNode->length) % SavedPrimes[hashTable->primesIdx];
     bucketNode->next = hashTable->buckets[idx];
     hashTable->buckets[idx] = bucketNode;
-    return 0;
 }
 
 static int HashTableRehash(HashTable* hashTable)
@@ -105,15 +104,15 @@ int HashTableAddData(HashTable* hashTable, const void* data, const size_t len)
     BucketNode** bucketNode = &hashTable->buckets[idx];
     while (*bucketNode) {
         if ((*bucketNode)->length == len && memcmp((*bucketNode)->data, data, len) == 0)
-            return 1;
+            return 0;
         bucketNode = &(*bucketNode)->next;
     }
     BucketNode* newBucketNode = CreateBacketNode(data, len);
     if (!newBucketNode)
-        return 0;
+        return 1;
     ++hashTable->size;
     *bucketNode = newBucketNode;
-    return 1;
+    return 0;
 }
 
 int HashTableFind(const HashTable* hashTable, const void* data, const size_t len)
