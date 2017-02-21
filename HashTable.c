@@ -14,8 +14,8 @@
 
 #define HashFunc HashEmaxx
 
-#define PrimesNumberCount 11
-int SavedPrimes[PrimesNumberCount] = {11, 101, 10111, 101111, 199999, 524287, 1011001, 5308417, 10010101, 100100111, 193877777};
+static int SavedPrimes[] = {11, 101, 10111, 101111, 199999, 524287, 1011001, 5308417, 10010101, 100100111, 193877777};
+static const int PrimesNumberCount = sizeof(SavedPrimes) / sizeof(int);
 
 static inline uint32_t HashEmaxx(const void* data,const size_t bytesCnt)
 {
