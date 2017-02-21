@@ -41,7 +41,7 @@ HashTable* CreateHashTable()
     if (!hashTable)
         return NULL;
     hashTable->primesIdx = 0;
-    hashTable->buckets = calloc(sizeof(BucketNode*), HashTableBucketsCount(hashTable));
+    hashTable->buckets = calloc(HashTableBucketsCount(hashTable), sizeof(BucketNode*));
     hashTable->size = 0;
     hashTable->factor = 2.0;
     return hashTable;
@@ -74,7 +74,7 @@ static int HashTableRehash(HashTable* hashTable)
         return 0;
     
     BucketNode** dumpBuckets = hashTable->buckets;
-    hashTable->buckets = calloc(sizeof(BucketNode*), SavedPrimes[hashTable->primesIdx+1]);
+    hashTable->buckets = calloc(SavedPrimes[hashTable->primesIdx+1], sizeof(BucketNode*));
     if (!hashTable->buckets) {
         hashTable->buckets = dumpBuckets;
         return 0;
